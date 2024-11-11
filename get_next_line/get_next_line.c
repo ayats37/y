@@ -6,34 +6,41 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:55:55 by taya              #+#    #+#             */
-/*   Updated: 2024/10/26 19:21:48 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/10 19:18:17 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "stdio.h"
-
-#define BUFFER_SIZE 5
 
 char	*ft_read(int fd, char *buffer)
 {
 	ssize_t	bytes_read;
-	char tmp[BUFFER_SIZE + 1];
-	char *join_tmp;
-	bytes_read = 1;
-	if (bytes_read > 0)
+	char	*new_buffer;
+	char	temp[BUFFER_SIZE + 1];
+
+	if (!buffer)
+		buffer = ft_strdup("");
+	while (!ft_strchr(buffer, '\n'))
 	{
-		bytes_read = read(fd, tmp, BUFFER_SIZE);
-	if (bytes_read == -1)
+		bytes_read = read(fd, temp, BUFFER_SIZE);
+		if (bytes_read == -1)
+		{
+			free(buffer);
+			return (NULL);
+		}
+		if (bytes_read == 0)
+			break ;
+		temp[bytes_read] = '\0';
+		new_buffer = ft_strjoin(buffer, temp);
+		free(buffer);
+		buffer = new_buffer;
+	}
+	if (buffer[0] == '\0')
 	{
 		free(buffer);
 		return (NULL);
 	}
-	}
-
-	tmp[bytes_read] = '\0';
-	join_tmp = ft_strjoin(buffer, tmp);
-	return (join_tmp);
+	return (buffer);
 }
 
 char	*ft_line(char *buffer)
@@ -42,20 +49,14 @@ char	*ft_line(char *buffer)
 	char	*line;
 
 	i = 0;
-	line = NULL;
-	line = malloc((ft_strlen(buffer) + 2) * sizeof(char));
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	line = malloc((i + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
-	if (buffer[i] == '\n')
-	{
-		line[i] = buffer[i];
-		i++;
-	}
+	ft_strncpy(line, buffer, i);
 	line[i] = '\0';
 	return (line);
 }
@@ -64,7 +65,6 @@ char	*ft_save_leftover(char *buffer)
 {
 	char	*after_newline;
 	char	*leftover;
-	int		len_leftover;
 
 	after_newline = ft_strchr(buffer, '\n');
 	if (!after_newline)
@@ -72,15 +72,8 @@ char	*ft_save_leftover(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	after_newline += 1;
-	len_leftover = ft_strlen(after_newline);
-	leftover = malloc((len_leftover + 1) * sizeof(char));
-	if (!leftover)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	ft_strcpy(leftover, after_newline);
+	after_newline++;
+	leftover = ft_strdup(after_newline);
 	free(buffer);
 	return (leftover);
 }

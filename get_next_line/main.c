@@ -1,34 +1,45 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 20:00:37 by taya              #+#    #+#             */
-/*   Updated: 2024/10/26 00:53:21 by taya             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "get_next_line_bonus.h"
+#include <fcntl.h>
 
-#include "get_next_line.h"
-#include "stdio.h"
-
-int main()
+int	main(void)
 {
-	char *line;
-	ssize_t fd;
-	
-	fd = open("file1.txt", O_RDONLY);
-	if (fd < 0)
+	int		fd1;
+	int		fd2;
+	char	*line;
+
+	fd1 = open("file11.txt", O_RDONLY);
+	printf("%d\n", fd1);
+	fd2 = open("file12.txt", O_RDONLY);
+	printf("%d\n", fd2);
+	fd1 = open("aya.txt", O_RDONLY);
+	printf("%d\n", fd1);
+
+	if (fd1 == -1)
 	{
-		perror("error reading a file");
+		perror("Error opening file1.txt");
 		return (1);
 	}
-	if ((line = get_next_line(fd)) != NULL)
+	if (fd2 == -1)
+	{
+		perror("Error opening file1.txt");
+		return (1);
+	}
+	while ((line = get_next_line(fd1)) != NULL)
 	{
 		printf("%s", line);
 		free(line);
 	}
-	close(fd);
+	close(fd1);
+	while ((line = get_next_line(fd2)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	while ((line = get_next_line(fd1)) != NULL)
+	{
+		printf("%s", line);
+		free(line);
+	}
+	close(fd2);
 	return (0);
 }

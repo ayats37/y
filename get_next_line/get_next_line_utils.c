@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:56:30 by taya              #+#    #+#             */
-/*   Updated: 2024/10/25 21:51:20 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/08 22:36:44 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,14 @@
 
 char	*ft_strchr(const char *str, int c)
 {
-	char	*first_occurance;
+	size_t	i;
 
-	first_occurance = NULL;
-	while (*str)
-	{
-		if (*str == (char)c)
-		{
-			first_occurance = (char *)str;
-			break ;
-		}
-		str++;
-	}
-	if (c == '\0')
-	{
-		return ((char *)str);
-	}
-	return (first_occurance);
+	i = 0;
+	while (str[i] && str[i] != (char)c)
+		i++;
+	if (str[i] == (char)c)
+		return ((char *)(str + i));
+	return (NULL);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -58,6 +49,26 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (s3);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char	*d;
+	int		len;
+	int		i;
+
+	len = ft_strlen(s);
+	d = malloc((len + 1) * sizeof(char));
+	i = 0;
+	if (!d)
+		return (NULL);
+	while (i < len)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	d[i] = '\0';
+	return (d);
+}
+
 size_t	ft_strlen(const char *str)
 {
 	int	i;
@@ -70,12 +81,12 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strncpy(char *dest, const char *src, int len)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (src[i])
+	while (i < len && src[i])
 	{
 		dest[i] = src[i];
 		i++;
