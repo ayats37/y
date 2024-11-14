@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Format ft_printf with c_formatter_42",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "cd ft_printf && c_formatter_42 *.c *.h"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
+
+
