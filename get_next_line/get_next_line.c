@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:55:55 by taya              #+#    #+#             */
-/*   Updated: 2024/11/10 19:18:17 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/12 15:25:39 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_read(int fd, char *buffer)
 
 	if (!buffer)
 		buffer = ft_strdup("");
+	if (!buffer)
+		return (NULL);
 	while (!ft_strchr(buffer, '\n'))
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
@@ -74,6 +76,8 @@ char	*ft_save_leftover(char *buffer)
 	}
 	after_newline++;
 	leftover = ft_strdup(after_newline);
+	if (!leftover)
+		return (NULL);
 	free(buffer);
 	return (leftover);
 }

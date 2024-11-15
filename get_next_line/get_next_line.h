@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:56:20 by taya              #+#    #+#             */
-/*   Updated: 2024/11/10 15:15:13 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/12 03:21:23 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 64

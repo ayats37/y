@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:03:07 by taya              #+#    #+#             */
-/*   Updated: 2024/11/11 03:12:32 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/15 16:32:35 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 64
 # endif
-
 typedef struct s_fd_node
 {
 	int					fd;
@@ -41,4 +41,5 @@ char					*ft_save_leftover(char *buffer);
 char	*get_next_line(int fd);
 void free_nodes_no_needed(t_fd_node **head, int fd);
 t_fd_node	*find_or_create_node(t_fd_node **head, int fd);
+
 #endif

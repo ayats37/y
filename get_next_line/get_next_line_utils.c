@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 03:56:30 by taya              #+#    #+#             */
-/*   Updated: 2024/11/08 22:36:44 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/13 15:53:51 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		len;
 	int		i;
 
-	if (!s1 && !s2)
-		return (NULL);
+	if (!s1) 
+		s1 = "";
+	if (!s2) 
+		s2 = "";
 	len = ft_strlen(s1) + ft_strlen(s2);
 	s3 = malloc((len + 1) * sizeof(char));
 	if (!s3)
@@ -55,6 +57,8 @@ char	*ft_strdup(const char *s)
 	int		len;
 	int		i;
 
+	if (!s)
+		return (NULL);
 	len = ft_strlen(s);
 	d = malloc((len + 1) * sizeof(char));
 	i = 0;
@@ -74,6 +78,8 @@ size_t	ft_strlen(const char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return(0);
 	while (str[i])
 	{
 		i++;
@@ -86,6 +92,8 @@ char	*ft_strncpy(char *dest, const char *src, int len)
 	int	i;
 
 	i = 0;
+	if (!dest || !src)
+		return (NULL);
 	while (i < len && src[i])
 	{
 		dest[i] = src[i];

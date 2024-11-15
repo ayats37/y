@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 11:03:03 by taya              #+#    #+#             */
-/*   Updated: 2024/11/11 17:58:59 by taya             ###   ########.fr       */
+/*   Created: 2024/11/15 16:33:19 by taya              #+#    #+#             */
+/*   Updated: 2024/11/15 16:33:57 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	node = find_or_create_node(&head, fd);
 	if (!node) 
-	{
-		//free_nodes_no_needed(&head, fd); 
 		return (NULL);
-	}
 	node->buffer = ft_read(fd, (node->buffer), &head);
 	if (!node->buffer)
 	{
