@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:03:07 by taya              #+#    #+#             */
-/*   Updated: 2024/11/15 16:32:35 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:05:04 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char					*ft_strchr(const char *str, int c);
 char					*ft_strjoin(char const *s1, char const *s2);
 char					*ft_strdup(const char *s);
 char					*ft_strncpy(char *dest, const char *src, int len);
-char	*ft_read(int fd, char *buffer, t_fd_node **head);
+char	*ft_read(int fd, char *buffer);
 char					*ft_save_leftover(char *buffer);
 char	*get_next_line(int fd);
 void free_nodes_no_needed(t_fd_node **head, int fd);

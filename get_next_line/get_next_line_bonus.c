@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 16:33:19 by taya              #+#    #+#             */
-/*   Updated: 2024/11/15 16:33:57 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:04:51 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 	node = find_or_create_node(&head, fd);
 	if (!node) 
 		return (NULL);
-	node->buffer = ft_read(fd, (node->buffer), &head);
+	node->buffer = ft_read(fd, (node->buffer));
 	if (!node->buffer)
 	{
 		free_nodes_no_needed(&head, fd); 

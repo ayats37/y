@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:02:57 by taya              #+#    #+#             */
-/*   Updated: 2024/11/15 16:35:37 by taya             ###   ########.fr       */
+/*   Updated: 2024/11/15 19:39:35 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_fd_node *find_or_create_node(t_fd_node **head, int fd)
     return (new_node);
 }
 
-char *ft_read(int fd, char *buffer, t_fd_node **head)
+char *ft_read(int fd, char *buffer)
 {
     ssize_t bytes_read;
     char *new_buffer;
@@ -50,32 +50,23 @@ char *ft_read(int fd, char *buffer, t_fd_node **head)
         if (bytes_read == -1)
         {
             free(buffer);
-            free_nodes_no_needed(head, fd); 
             return (NULL);
         }
         if (bytes_read == 0)
             break;
         temp[bytes_read] = '\0';
         new_buffer = ft_strjoin(buffer, temp);
-        if (!new_buffer)
-        {
-            free(buffer);
-            free_nodes_no_needed(head, fd); 
-            return (NULL);
-        }
-
         free(buffer); 
         buffer = new_buffer;
     }
-
     if (buffer[0] == '\0')
     {
         free(buffer);
         return (NULL);
     }
-
     return (buffer);
 }
+
 
 void free_nodes_no_needed(t_fd_node **head, int fd)
 {
